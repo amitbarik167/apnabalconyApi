@@ -18,13 +18,7 @@ exports.upsert = (req,res)=>{
         if (!userAuthorization) {
             return res.status(500).send({
                 message: "user authorization could not be upserted"
-            }).catch(err => {
-                if (err.kind === 'ObjectId') {
-                    return res.status(404).send({
-                        message: "user authorization not found with userId " + req.params.userId
-                    });
-                }
-           });
+            })
          }
 
         else
@@ -42,9 +36,15 @@ exports.upsert = (req,res)=>{
             }
             return res.status(500).send({
                 message: "Error updating user authorization with userId " + req.params.userId
-            }).catch();
+            })
         });
-    });
+    }).catch(err => {
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "user authorization not found with userId " + req.params.userId
+            });
+        }
+   });;
 };
 
 
