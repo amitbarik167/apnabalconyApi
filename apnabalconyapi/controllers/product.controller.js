@@ -91,22 +91,13 @@ exports.update = (req, res) => {
     }
 
     Product.findByIdAndUpdate(req.params._id, {
-        productCode: req.fields.productCode,
-        productName: req.fields.productName || "Untitled  product",
-        productDesc: req.fields.productDesc,
-        productImg: fs.readFileSync(req.files.productImg.path),
-        productPrice:req.fields.productPrice,
-        productSize:req.fields.productSize,
-        productFor:req.fields.productFor,
-        productDiscount:req.field.productDiscount,
-        productOffersId:req.field.productOffersId,
-        productCustomerRating:req.field.productCustomerRating,
-        productOccasion:req.fields.productOccasion,
-        productFit:req.fields.productFit,
-        productCategory:req.fields.productCategoryId,
-        productSubCategory:req.fields.productSubCategoryId,
-        productColor:req.fields.productColorId,
-        productBrand:req.fields.productBrandId,
+        productCode: req.body.productCode,
+        productName: req.body.productName || "Untitled  product",
+        productDesc: req.body.productDesc,
+        productPrice:req.body.productPrice,
+        productDiscount:req.body.productDiscount,
+        productOffersId:req.body.productOffersId,
+        productCustomerRating:req.body.productCustomerRating,
         isActive:true
 
     }, { new: true }).then(product => {
