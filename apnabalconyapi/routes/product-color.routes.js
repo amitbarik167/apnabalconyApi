@@ -21,4 +21,8 @@ module.exports = (app) => {
       // Create a new product color
     app.post('/productColor/:productColorCode',formidable() ,verifyTokenRoutes.verifyToken,productColor.upsert);
 
+      // Retrieve all product color
+      app.get('/productsList/productColors', productColor.findAll);
+
+
 }

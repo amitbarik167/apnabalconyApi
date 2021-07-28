@@ -6,7 +6,7 @@ module.exports = (app) => {
     app.post('/productSubCategory',verifyTokenRoutes.verifyToken, productSubCategory.create);
 
     // Retrieve all product category
-    app.get('/productSubCategories', productSubCategory.findAll);
+    app.get('/productSubCategories',verifyTokenRoutes.verifyToken, productSubCategory.findAll);
 
     // Retrieve a single product category with productCategoryId
     app.get('/productSubCategory/:_id',verifyTokenRoutes.verifyToken, productSubCategory.findOne);
@@ -19,6 +19,9 @@ module.exports = (app) => {
 
       // Create a new product sub-category
     app.post('/productSubCategory/:productSubCategoryCode',verifyTokenRoutes.verifyToken, productSubCategory.upsert);
+
+    // Retrieve all product category
+     app.get('/productsList/productSubCategories', productSubCategory.findAll);
 
     
 
