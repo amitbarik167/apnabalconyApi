@@ -21,9 +21,9 @@ jobs:
       with:
         node-version: '14.x'
 
-    - name: npm install, build, and test
+    - name: npm install --only=dev , build, and test
       run: |
-        npm install
+        npm install --only=dev
         npm run build --if-present
         npm run test --if-present
 
