@@ -23,7 +23,6 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        cd apnaBalconyApi 
         npm install
         npm run build --if-present
         npm run test --if-present
@@ -53,5 +52,5 @@ jobs:
       with:
         app-name: 'apnabalconyapi'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f64802a06e4649f5a1ca95fda723676d }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_762268b2a73749c0ac4c4206c83b18ab }}
         package: .
