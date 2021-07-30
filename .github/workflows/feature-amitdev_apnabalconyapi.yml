@@ -23,7 +23,8 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        cd apnaBalconyApi npm install
+        cd apnaBalconyApi 
+        npm install
         npm run build --if-present
         npm run test --if-present
 
