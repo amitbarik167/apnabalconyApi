@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c854cc76-cef0-40f5-9ebf-8419da4c8613/resourceGroups/apnabalcony/providers/Microsoft.Web/sites/apnabalconyapi",
+    "appService.deploySubpath": "."
+}
