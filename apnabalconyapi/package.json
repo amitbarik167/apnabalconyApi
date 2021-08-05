@@ -5,5 +5,8 @@
     "express-formidable": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+}
 }
