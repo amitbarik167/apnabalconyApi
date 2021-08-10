@@ -156,11 +156,11 @@ exports.upsert = (req, res) => {
     }).catch(err => {
         if (err.kind === 'ObjectId') {
             return res.status(500).send({
-                message: "Error upserting product with productCode " + req.params.productCode
+                message: "Error upserting product with productCode " + req.params.productCode + err.message
             });
         }
         return res.status(500).send({
-            message: "Error updating product with productCode " + req.params.productCode
+            message: "Error updating product with productCode " + req.params.productCode  + err.message
         });
     });
 };
