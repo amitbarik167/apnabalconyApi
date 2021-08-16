@@ -19,4 +19,8 @@ module.exports = (app) => {
       // Create a new product category
     app.post('/productCategory/:productCategoryCode', verifyTokenRoutes.verifyToken, productCategory.upsert);
 
+     // Retrieve all product category
+     app.get('/productsList/productCategories',  productCategory.findAll);
+
+
 }

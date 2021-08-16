@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const port = process.env.PORT || 3000
 
 
 //create cors
@@ -42,11 +42,15 @@ require('./routes/product-brand.routes.js')(app);
 //require product routes
 require('./routes/product.routes.js')(app);
 
+
+//require product images routes
+require('./routes/product-images.routes.js')(app);
+
 //require user authorization routes
 require('./routes/user-authorization.routes.js')(app);
 
 // listen for requests
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Server is listening on port 3000");
 });
 

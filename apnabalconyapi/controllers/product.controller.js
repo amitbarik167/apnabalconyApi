@@ -1,8 +1,10 @@
 const Product= require('../models/product.model.js');
 const formidable = require('express-formidable');
 const fs = require('fs'); 
+var ObjectId = require('mongodb').ObjectID;
 
 const mongoose = require('mongoose');
+const { match } = require('assert');
 exports.create = (req,res)=> {
 
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
@@ -154,11 +156,11 @@ exports.upsert = (req, res) => {
     }).catch(err => {
         if (err.kind === 'ObjectId') {
             return res.status(500).send({
-                message: "Error upserting product with productCode " + req.params.productCode
+                message: "Error upserting product with productCode " + req.params.productCode + err.message
             });
         }
         return res.status(500).send({
-            message: "Error updating product with productCode " + req.params.productCode
+            message: "Error updating product with productCode " + req.params.productCode  + err.message
         });
     });
 };
@@ -182,6 +184,111 @@ exports.delete = (req, res) => {
         };
         return res.status(200).send(response);
    });
+};
+
+
+
+exports.find = (req, res) => {
+    var query ={};
+
+    if(req.body.hasOwnProperty('_id'))
+    {
+        query._id = {"$in":req.body._id}
+    }
+    if(req.body.hasOwnProperty('productName'))
+    {
+        query.productName = {"$in":req.body.productName}
+    }
+    if(req.body.hasOwnProperty('productCode'))
+    {
+        query.productCode = {"$in":req.body.productCode}
+    }
+    if(req.body.hasOwnProperty('productPrice'))
+    {
+        query.productPrice = {"$lte":req.body.productPrice}
+    }
+    if(req.body.hasOwnProperty('productDiscount'))
+    {
+        query.productDiscount = {"$gte":req.body.productDiscount}
+    }
+    if(req.body.hasOwnProperty('productCategory'))
+    {
+        query.productCategory = {"$in":req.body.productCategory}
+    }
+    if(req.body.hasOwnProperty('productSubCategory'))
+    {
+        query.productSubCategory = {"$in":req.body.productSubCategory}
+    }
+    if(req.body.hasOwnProperty('productBrand'))
+    {
+        query.productBrand = {"$in":req.body.productBrand}
+    }
+    if(req.body.hasOwnProperty('productColor'))
+    {
+        query.productColor = {"$in":req.body.productColor}
+    }
+    
+    Product.find(query).populate('productCategory',  'productCategoryName').populate('productSubCategory','productSubCategoryName').populate('productBrand','productBrandImg').populate('productColor','productColorImg').then(products => {
+        res.send(products);
+
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving products based on the filter"
+        });
+    });
+  
+};
+
+
+exports.findByParams = (req, res) => {
+    var query ={};
+
+    if(req.body.hasOwnProperty('_id'))
+    {
+        query._id = {"$in":req.body._id}
+    }
+    if(req.body.hasOwnProperty('productName'))
+    {
+        query.productName = {"$in":req.body.productName}
+    }
+    if(req.body.hasOwnProperty('productCode'))
+    {
+        query.productCode = {"$in":req.body.productCode}
+    }
+    if(req.body.hasOwnProperty('productPrice'))
+    {
+        query.productPrice = {"$lte":req.body.productPrice}
+    }
+    if(req.body.hasOwnProperty('productDiscount'))
+    {
+        query.productDiscount = {"$gte":req.body.productDiscount}
+    }
+    if(req.body.hasOwnProperty('productCategory'))
+    {
+        query.productCategory = {"$in":req.body.productCategory}
+    }
+    if(req.body.hasOwnProperty('productSubCategory'))
+    {
+        query.productSubCategory = {"$in":req.body.productSubCategory}
+    }
+    if(req.body.hasOwnProperty('productBrand'))
+    {
+        query.productBrand = {"$in":req.body.productBrand}
+    }
+    if(req.body.hasOwnProperty('productColor'))
+    {
+        query.productColor = {"$in":req.body.productColor}
+    }
+    
+    Product.find(query).populate('productCategory',  'productCategoryName').populate('productSubCategory','productSubCategoryName').populate('productBrand','productBrandImg').populate('productColor','productColorImg').then(products => {
+        res.send(products);
+
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving products based on the filter"
+        });
+    });
+  
 };
 
 

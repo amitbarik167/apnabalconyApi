@@ -21,4 +21,11 @@ module.exports = (app) => {
       // Create a new product brand
     app.post('/productBrand/:productBrandCode',formidable() ,verifyTokenRoutes.verifyToken,productBrand.upsert);
 
+    // Retrieve all product brand
+    app.get('/productsList/productBrands',  productBrand.findAll);
+
+ 
+
+
+
 }

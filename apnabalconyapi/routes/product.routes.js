@@ -9,6 +9,9 @@ module.exports = (app) => {
     // Retrieve all product 
     app.get('/products', verifyTokenRoutes.verifyToken, product.findAll);
 
+     // Retrieve all product 
+     app.get('/products/all', product.findAll);
+
     // Retrieve a single product  with _id
     app.get('/product/:_id', verifyTokenRoutes.verifyToken, product.findOne);
 
@@ -20,5 +23,12 @@ module.exports = (app) => {
 
       // Create a new product
     app.post('/product/:productCode',formidable() ,verifyTokenRoutes.verifyToken,product.upsert);
+
+        // Retrieve all product 
+    app.put('/products', product.find);
+
+    
+        // Retrieve all product 
+    app.put('/productsSearchByFilter',verifyTokenRoutes.verifyToken, product.findByParams);
 
 }
