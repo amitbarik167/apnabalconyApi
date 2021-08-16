@@ -42,6 +42,10 @@ require('./routes/product-brand.routes.js')(app);
 //require product routes
 require('./routes/product.routes.js')(app);
 
+
+//require product images routes
+require('./routes/product-images.routes.js')(app);
+
 //require user authorization routes
 require('./routes/user-authorization.routes.js')(app);
 

@@ -27,4 +27,8 @@ module.exports = (app) => {
         // Retrieve all product 
     app.put('/products', product.find);
 
+    
+        // Retrieve all product 
+    app.put('/productsSearchByFilter',verifyTokenRoutes.verifyToken, product.findByParams);
+
 }
