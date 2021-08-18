@@ -49,6 +49,9 @@ require('./routes/product-images.routes.js')(app);
 //require user authorization routes
 require('./routes/user-authorization.routes.js')(app);
 
+//require send email routes
+require('./routes/send-email.routes.js')(app);
+
 // listen for requests
 app.listen(port, () => {
     console.log("Server is listening on port 3000");
