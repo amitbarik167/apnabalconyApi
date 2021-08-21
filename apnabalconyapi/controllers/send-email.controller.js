@@ -3,13 +3,14 @@ const formidable = require('express-formidable');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var ObjectId = require('mongodb').ObjectID;
+const emailConfig = require('..//config/smtpsettings.config');
 
 var transporter = nodemailer.createTransport(smtpTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
+  host: emailConfig.smtphost,
+  port: emailConfig.smtpport,
   auth: {
-    user: 'apnabalcony@gmail.com',
-    pass: 'soumyak@89'
+    user: emailConfig.authuser,
+    pass: emailConfig.authpass
   }
 }));
 
