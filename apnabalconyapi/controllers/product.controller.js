@@ -28,7 +28,8 @@ exports.create = (req,res)=> {
         productSubCategory:req.fields.productSubCategoryId,
         productColor:req.fields.productColorId,
         productBrand:req.fields.productBrandId,
-        isActive:true
+        isActive:true,
+        createdBy : req.fields.createdBy
         })
     
 
@@ -98,8 +99,8 @@ exports.update = (req, res) => {
         productStockUnits:req.body.productStockUnits,
         productOffersId:req.body.productOffersId,
         productCustomerRating:req.body.productCustomerRating,
-        isActive:true
-
+        isActive:true,
+        modifiedBy:req.body.modifiedBy
     }, { new: true }).then(product => {
 
         if (!product) {
@@ -141,7 +142,8 @@ exports.upsert = (req, res) => {
         productSubCategory:req.fields.productSubCategoryId,
         productColor:req.fields.productColorId,
         productBrand:req.fields.productBrandId,
-        isActive:true
+        isActive:true,
+        createdBy : req.fields.createdBy
 
     }, { upsert: true, new: true, runValidators: true }).then(product => {
 

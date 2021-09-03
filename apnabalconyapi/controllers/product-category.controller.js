@@ -14,7 +14,9 @@ exports.create = (req, res) => {
     const productCategory = new ProductCategory({
         productCategoryCode: req.body.productCategoryCode,
         productCategoryName: req.body.productCategoryName || "Untitled product category",
-        productCategoryDesc: req.body.productCategoryDesc
+        productCategoryDesc: req.body.productCategoryDesc,
+        createdBy : req.body.createdBy
+
     });
 
     // Save product Category in the database
@@ -75,7 +77,8 @@ exports.update = (req, res) => {
     ProductCategory.findByIdAndUpdate(req.params._id, {
         productCategoryCode: req.body.productCategoryCode,
         productCategoryName: req.body.productCategoryName || "untitled product category",
-        productCategoryDesc: req.body.productCategoryDesc
+        productCategoryDesc: req.body.productCategoryDesc,
+        modifiedBy:req.body.modifiedBy
 
     }, { new: true }).then(productCategory => {
 
@@ -111,7 +114,10 @@ exports.upsert = (req, res) => {
     ProductCategory.findOneAndUpdate({ productCategoryCode: req.params.productCategoryCode }, {
         productCategoryCode: req.body.productCategoryCode,
         productCategoryName: req.body.productCategoryName || "untitled product category",
-        productCategoryDesc: req.body.productCategoryDesc
+        productCategoryDesc: req.body.productCategoryDesc,
+        createdBy : req.body.createdBy,
+        isActive:true,
+       
 
     }, { upsert: true, new: true, runValidators: true }).then(productCategory => {
 

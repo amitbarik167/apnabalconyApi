@@ -52,6 +52,15 @@ require('./routes/user-authorization.routes.js')(app);
 //require send email routes
 require('./routes/send-email.routes.js')(app);
 
+// require order insert routes
+require('./routes/order.routes.js')(app);
+
+// require order items insert routes
+require('./routes/order-items.routes.js')(app);
+
+// require order customer address routes
+require('./routes/order-customeraddress.routes.js')(app);
+
 // listen for requests
 app.listen(port, () => {
     console.log("Server is listening on port 3000");

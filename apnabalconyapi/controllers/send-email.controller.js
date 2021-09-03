@@ -34,7 +34,8 @@ exports.create = (req,res)=> {
         from: email.fromEmail,
         to: email.toEmail,
         subject: email.subject,
-        text: email.text
+        html: email.text
+        
       };
       
   
