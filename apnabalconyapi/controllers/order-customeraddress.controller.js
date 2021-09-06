@@ -30,3 +30,25 @@ exports.create = (req,res)=> {
    
 };
 
+exports.find = (req, res) => {
+    OrderCustomerAddress.find({order:req.params.orderId}).then(items => {
+
+        if (!items) {
+            return res.status(404).send({
+                message: "Customer details not found with OrderId " + req.params.orderId
+            });
+        }
+        res.send(items);
+
+    }).catch(err => {
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Customer details not found with OrderId " + req.params.orderId
+            });
+        }
+        return res.status(500).send({
+            message: "Error retrieving customer details  with OrderId" + req.params.orderId
+        });
+    });
+};
+

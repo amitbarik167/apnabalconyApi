@@ -1,3 +1,4 @@
+
 const OrderItems =  require('../models/order-items.js');
 
 
@@ -12,7 +13,7 @@ exports.create = (req,res)=> {
       const orderItems = new OrderItems({
       order : req.body.orderId,
       product: req.body.productId,
-      Qty: req.body.Qty
+      qty: req.body.qty
         })
   
       
@@ -29,13 +30,25 @@ exports.create = (req,res)=> {
   };
   
 
-exports.findAll = (req, res) => {
-    OrderItems.find().populate('order','orderId').populate('product','productName').then(orderItems => {
-        res.send(orderItems);
+
+exports.find = (req, res) => {
+    OrderItems.find({order:req.params.orderId}).populate('product').then(items => {
+
+        if (!items) {
+            return res.status(404).send({
+                message: "Order Items not found with OrderId " + req.params.orderId
+            });
+        }
+        res.send(items);
 
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving order items."
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Order Items not found with OrderId " + req.params.orderId
+            });
+        }
+        return res.status(500).send({
+            message: "Error retrieving order items  with OrderId" + req.params.orderId
         });
     });
 };

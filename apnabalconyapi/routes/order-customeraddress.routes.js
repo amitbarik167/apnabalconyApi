@@ -3,4 +3,8 @@ module.exports = (app) => {
     
     app.post('/orderCustomerAddressCreate',orderCustomerAddress.create);
 
+    // Retrieve a single order Item with OrderId
+    app.get('/orderCustomerAddress/:orderId', orderCustomerAddress.find);
+
+
 }
