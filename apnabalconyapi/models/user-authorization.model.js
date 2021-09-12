@@ -3,7 +3,9 @@ const UserAuthorizationSchema = new mongoose.Schema
     ({
         _id:mongoose.Schema.Types.ObjectId,
         userId:String,
-        authorizationToken:String
+        authorizationToken:String,
+        isAdmin:{type:Boolean, default:false},
+        modifiedBy:String
     },
         {
             timestamps: true
