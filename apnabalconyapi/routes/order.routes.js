@@ -11,4 +11,7 @@ module.exports = (app) => {
 
         // Update a product category with productCategoryId
     app.put('/orderUpdate/:_id', order.update);
+
+    // Retrieve a single order with OrderNo
+    app.get('/ordersFindByUserId/:userId', order.findOrdersByUserId);
 }

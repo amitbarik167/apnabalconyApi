@@ -101,4 +101,26 @@ exports.update = (req, res) => {
     });
 };
 
+exports.findOrdersByUserId = (req, res) => {
+    Order.find({userId:req.params.userId}).then(order => {
+
+        if (!order) {
+            return res.status(404).send({
+                message: "Order not found with userId " + req.params.userId
+            });
+        }
+        res.send(order);
+
+    }).catch(err => {
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Order not found with userId " + req.params.userId
+            });
+        }
+        return res.status(500).send({
+            message: "Error retrieving Order with userId " + req.params.userId
+        });
+    });
+};
+
 

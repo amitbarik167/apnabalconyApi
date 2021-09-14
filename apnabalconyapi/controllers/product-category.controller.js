@@ -1,4 +1,6 @@
 const ProductCategory = require('../models/product-category.model.js');
+const formidable = require('express-formidable');
+const fs = require('fs'); 
 
 exports.create = (req, res) => {
 
@@ -105,20 +107,20 @@ exports.update = (req, res) => {
 
 exports.upsert = (req, res) => {
 
-    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    if (req.fields.productCategoryCode == "" || req.fields.productCategoryName == "" || req.files.productCategoryImg.path =="")  {
         return res.status(400).send({
-            message: "product category cannot be empty for update"
+            message: "Either Product Category Code or Product Category Name or Product Category Image is blank."
         });
     }
 
     ProductCategory.findOneAndUpdate({ productCategoryCode: req.params.productCategoryCode }, {
-        productCategoryCode: req.body.productCategoryCode,
-        productCategoryName: req.body.productCategoryName || "untitled product category",
-        productCategoryDesc: req.body.productCategoryDesc,
-        createdBy : req.body.createdBy,
-        isActive:true,
+        productCategoryCode: req.fields.productCategoryCode,
+        productCategoryName: req.fields.productCategoryName || "untitled product category",
+        productCategoryDesc: req.fields.productCategoryDesc,
+        productCategoryImg:fs.readFileSync(req.files.productCategoryImg.path),
+        createdBy : req.fields.createdBy,
+        isActive:true
        
-
     }, { upsert: true, new: true, runValidators: true }).then(productCategory => {
 
         if (!productCategory) {
