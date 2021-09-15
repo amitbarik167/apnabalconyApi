@@ -5,6 +5,7 @@ const ProductCategorySchema = new mongoose.Schema
         productCategoryCode: String,
         productCategoryName: String,
         productCategoryDesc: String,
+        productCategoryImg: { data: Buffer, contentType: String },
         createdBy:String,
         modifiedBy:String,
         isActive: Boolean

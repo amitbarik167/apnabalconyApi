@@ -23,6 +23,7 @@ exports.upsert = (req, res) => {
         productColor:req.fields.productColorId,
         productBrand:req.fields.productBrandId,
         isActive:true
+      
 
     }, { upsert: true, new: true, runValidators: true }).then(productImages => {
 
