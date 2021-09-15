@@ -1,6 +1,8 @@
 module.exports = (app) => {
     const productCategory = require('../controllers/product-category.controller.js');
     const verifyTokenRoutes = require('../routes/verify-token.routes.js')
+    const formidable = require('express-formidable');
+    
     // Create a new product category
     app.post('/productCategory', verifyTokenRoutes.verifyToken, productCategory.create);
 
@@ -17,7 +19,7 @@ module.exports = (app) => {
     app.delete('/productCategory/:_id', verifyTokenRoutes.verifyToken, productCategory.delete);
 
       // Create a new product category
-    app.post('/productCategory/:productCategoryCode', verifyTokenRoutes.verifyToken, productCategory.upsert);
+    app.post('/productCategory/:productCategoryCode',formidable(), verifyTokenRoutes.verifyToken, productCategory.upsert);
 
      // Retrieve all product category
      app.get('/productsList/productCategories',  productCategory.findAll);

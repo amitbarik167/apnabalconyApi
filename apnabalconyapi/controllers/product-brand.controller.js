@@ -18,7 +18,8 @@ exports.create = (req,res)=> {
         productBrandImg: fs.readFileSync(req.files.productBrandImg.path),
         productCategory:req.body.productCategoryId,
         productSubCategory:req.body.productSubCategoryId,
-        isActive:true
+        isActive:true,
+        createdBy : req.body.createdBy
         })
     
 
@@ -84,7 +85,8 @@ exports.update = (req, res) => {
         productBrandCode: req.body.productBrandCode,
         productBrandName: req.body.productBrandName || "Untitled  product brand",
         productBrandDesc: req.body.productBrandDesc,
-        isActive:true
+        isActive:true,
+        modifiedBy : req.body.modifiedBy
 
     }, { new: true }).then(productBrand => {
 
@@ -123,7 +125,8 @@ exports.upsert = (req, res) => {
         productBrandImg: fs.readFileSync(req.files.productBrandImg.path),
         productCategory:req.fields.productCategoryId,
         productSubCategory:req.fields.productSubCategoryId,
-        isActive:true
+        isActive:true,
+        createdBy : req.fields.createdBy
 
     }, { upsert: true, new: true, runValidators: true }).then(productBrandCode => {
 

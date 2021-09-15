@@ -14,7 +14,8 @@ exports.create = (req,res) => {
         productCategoryCode: req.fields.productColorCode,
         productCategoryName: req.fields.productColorName || "Untitled product color",
         productCategoryDesc: req.fields.productColorDesc,
-        productColorImg: req.fields.productColorImg
+        productColorImg: req.fields.productColorImg,
+        createdBy : req.fields.createdBy
     });
 
     // Save product Color in the database
@@ -38,7 +39,9 @@ exports.create = (req,res) => {
         productColorCode: req.fields.productColorCode,
         productColorName: req.fields.productColorName || "untitled product Color",
         productColorDesc: req.fields.productColorDesc,
-        productColorImg:fs.readFileSync(req.files.productColorImg.path)
+        productColorImg:fs.readFileSync(req.files.productColorImg.path),
+        isActive:true,
+        createdBy : req.fields.createdBy
     }, { upsert: true, new: true, runValidators: true }).then(productColor => {
         if (!productColor) {
             return res.status(500).send({
@@ -72,7 +75,8 @@ exports.update = (req, res) => {
     ProductColor.findByIdAndUpdate(req.params._id, {
         productColorCode: req.body.productColorCode,
         productColorName: req.body.productColorName || "untitled product color",
-        productColorDesc: req.body.productColorDesc
+        productColorDesc: req.body.productColorDesc,
+        modifiedBy : req.body.modifiedBy
        
     }, { new: true }).then(productColor => {
 

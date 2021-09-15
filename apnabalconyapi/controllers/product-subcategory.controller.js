@@ -12,7 +12,9 @@ exports.create = (req,res)=> {
         productSubCategoryCode: req.body.productSubCategoryCode,
         productSubCategoryName: req.body.productSubCategoryName || "Untitled  product sub category",
         productSubCategoryDesc: req.body.productSubCategoryDesc,
-        productCategory:req.body.productCategoryId
+        productCategory:req.body.productCategoryId,
+        createdBy : req.body.createdBy
+
         })
     
 
@@ -76,7 +78,8 @@ exports.update = (req, res) => {
     ProductSubCategory.findByIdAndUpdate(req.params._id, {
         productSubCategoryCode: req.body.productSubCategoryCode,
         productSubCategoryName: req.body.productSubCategoryName || "untitled product sub category",
-        productSubCategoryDesc: req.body.productSubCategoryDesc
+        productSubCategoryDesc: req.body.productSubCategoryDesc,
+        modifiedBy : req.body.modifiedBy
 
     }, { new: true }).then(productSubCategory => {
 
@@ -114,7 +117,8 @@ exports.upsert = (req, res) => {
         productSubCategoryName: req.body.productSubCategoryName || "untitled product sub category",
         productSubCategoryDesc: req.body.productSubCategoryDesc,
         isActive:true,
-        productCategory:req.body.productCategoryId
+        productCategory:req.body.productCategoryId,
+        createdBy : req.body.createdBy
 
     }, { upsert: true, new: true, runValidators: true }).then(productSubCategory => {
 
