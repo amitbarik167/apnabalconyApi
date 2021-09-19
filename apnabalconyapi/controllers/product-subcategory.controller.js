@@ -1,5 +1,8 @@
 const ProductSubCategory = require('../models/product-subcategory.model.js');
 const mongoose = require('mongoose');
+const formidable = require('express-formidable');
+const fs = require('fs'); 
+
 exports.create = (req,res)=> {
 
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
@@ -106,19 +109,20 @@ exports.update = (req, res) => {
 
 exports.upsert = (req, res) => {
 
-    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+
+    if (req.fields.productSubCategoryCode == "" || req.fields.productSubCategoryName == "" || req.files.productSubCategoryImg.path =="")  {
         return res.status(400).send({
-            message: "product category cannot be empty for update"
+            message: "Either Product Sub-Category Code or Product Sub-Category Name or Product Sub-Category Image is blank."
         });
     }
-
     ProductSubCategory.findOneAndUpdate({ productSubCategoryCode: req.params.productSubCategoryCode }, {
-        productSubCategoryCode: req.body.productSubCategoryCode,
-        productSubCategoryName: req.body.productSubCategoryName || "untitled product sub category",
-        productSubCategoryDesc: req.body.productSubCategoryDesc,
+        productSubCategoryCode: req.fields.productSubCategoryCode,
+        productSubCategoryName: req.fields.productSubCategoryName || "untitled product sub category",
+        productSubCategoryDesc: req.fields.productSubCategoryDesc,
+        productSubCategoryImg:fs.readFileSync(req.files.productSubCategoryImg.path),
         isActive:true,
-        productCategory:req.body.productCategoryId,
-        createdBy : req.body.createdBy
+        productCategory:req.fields.productCategoryId,
+        createdBy : req.fields.createdBy
 
     }, { upsert: true, new: true, runValidators: true }).then(productSubCategory => {
 

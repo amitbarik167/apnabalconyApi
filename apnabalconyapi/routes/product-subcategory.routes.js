@@ -1,7 +1,8 @@
 module.exports = (app) => {
     const productSubCategory = require('../controllers/product-subcategory.controller.js');
     const verifyTokenRoutes = require('../routes/verify-token.routes.js');
-
+    const formidable = require('express-formidable');
+    
     // Create a new product category
     app.post('/productSubCategory',verifyTokenRoutes.verifyToken, productSubCategory.create);
 
@@ -18,7 +19,7 @@ module.exports = (app) => {
     app.delete('/productSubCategory/:_id',verifyTokenRoutes.verifyToken, productSubCategory.delete);
 
       // Create a new product sub-category
-    app.post('/productSubCategory/:productSubCategoryCode',verifyTokenRoutes.verifyToken, productSubCategory.upsert);
+    app.post('/productSubCategory/:productSubCategoryCode',formidable(),verifyTokenRoutes.verifyToken, productSubCategory.upsert);
 
     // Retrieve all product category
      app.get('/productsList/productSubCategories', productSubCategory.findAll);

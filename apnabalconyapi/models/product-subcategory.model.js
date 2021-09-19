@@ -6,6 +6,7 @@ const ProductSubCategorySchema = new mongoose.Schema(
         productSubCategoryCode:String,
         productSubCategoryName:String,
         productSubCategoryDesc:String,
+        productSubCategoryImg: { data: Buffer, contentType: String },
         isActive:Boolean,
         createdBy:String,
         modifiedBy:String,
