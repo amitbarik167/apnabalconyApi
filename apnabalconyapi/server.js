@@ -61,6 +61,11 @@ require('./routes/order-items.routes.js')(app);
 // require order customer address routes
 require('./routes/order-customeraddress.routes.js')(app);
 
+// require order customer homeplan routes
+require('./routes/order-customer-homeplan.routes.js')(app);
+
+
+
 // listen for requests
 app.listen(port, () => {
     console.log("Server is listening on port 3000");
