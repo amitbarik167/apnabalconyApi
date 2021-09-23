@@ -15,6 +15,7 @@ exports.create = (req,res)=> {
     address:req.body.address,
     emailId: req.body.emailId,
     phoneNo: req.body.phoneNo
+  
 })
 
 
