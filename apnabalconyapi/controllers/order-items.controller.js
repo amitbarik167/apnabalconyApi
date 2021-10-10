@@ -13,6 +13,7 @@ exports.create = (req,res)=> {
       const orderItems = new OrderItems({
       order : req.body.orderId,
       product: req.body.productId,
+      template: req.body.templateId,
       qty: req.body.qty
         })
   
@@ -32,7 +33,7 @@ exports.create = (req,res)=> {
 
 
 exports.find = (req, res) => {
-    OrderItems.find({order:req.params.orderId}).populate('product').then(items => {
+    OrderItems.find({order:req.params.orderId}).populate('product').populate('template').then(items => {
 
         if (!items) {
             return res.status(404).send({

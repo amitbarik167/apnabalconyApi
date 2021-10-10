@@ -64,7 +64,11 @@ require('./routes/order-customeraddress.routes.js')(app);
 // require order customer homeplan routes
 require('./routes/order-customer-homeplan.routes.js')(app);
 
+// require template insert routes
+require('./routes/template.routes.js')(app);
 
+// require template images insert routes
+require('./routes/template-images.routes.js')(app);
 
 // listen for requests
 app.listen(port, () => {
