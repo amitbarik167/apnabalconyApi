@@ -69,7 +69,7 @@ exports.find = (req, res) => {
     });
 }
 
-    // This is to delete product images existing values by productId
+    // This is to delete product images existing values by _id
     exports.delete = (req, res) => {
 
         if (Object.keys(req.params).length === 0) {
@@ -79,6 +79,27 @@ exports.find = (req, res) => {
         }
     
         ProductImages.findByIdAndRemove({_id:req.params._id }, (err) => {
+            // As always, handle any potential errors:
+            if (err) return res.status(500).send(err);
+            // We'll create a simple object to send back with a message and the id of the document that was removed
+            // You can really do this however you want, though.
+            const response = {
+                message: "Product Images deleted sucessfully",
+            };
+            return res.status(200).send(response);
+       });
+    };
+
+      // This is to delete product images existing values by ProductId
+      exports.deleteByProductId = (req, res) => {
+
+        if (Object.keys(req.params).length === 0) {
+            return res.status(400).send({
+                message: "productId cannot be blank"
+            });
+        }
+    
+        ProductImages.deleteMany({productId:req.params.productId }, (err) => {
             // As always, handle any potential errors:
             if (err) return res.status(500).send(err);
             // We'll create a simple object to send back with a message and the id of the document that was removed

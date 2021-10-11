@@ -11,12 +11,16 @@ module.exports = (app) => {
      app.get('/productImages/:productId', verifyTokenRoutes.verifyToken, productImages.find);
 
      
-    // Delete  product  images  with productId
+    // Delete  product  images  with _id
     app.delete('/productImages/:_id', verifyTokenRoutes.verifyToken, productImages.delete);
 
 
    // Retrieve a single product  with productId without auth
     app.get('/productImages/all/:productId', productImages.find);
+
+        // Delete  product  images  with _id
+    app.delete('/productImagesDeleteByProductId/:productId', verifyTokenRoutes.verifyToken, productImages.deleteByProductId);
+
 
     
 }
