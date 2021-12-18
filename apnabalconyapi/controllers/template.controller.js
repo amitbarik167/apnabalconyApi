@@ -20,6 +20,7 @@ exports.upsert = (req,res)=> {
     templatePrice:req.fields.templatePrice,
     templateImg: fs.readFileSync(req.files.templateImg?.path),
     balconySize:req.fields.balconySize,
+    isEmpty: req.fields.isEmpty,
     createdBy: req.fields.createdBy
       },{ upsert: true, new: true, runValidators: true })
       .then(data => {
@@ -61,6 +62,7 @@ exports.update = (req, res) => {
         templateDesc:req.body.templateDesc,
         templatePrice:req.body.templatePrice,
         balconySize:req.body.balconySize,
+        isEmpty: req.body.isEmpty,
         modifiedBy:req.body.modifiedBy
     }, { new: true }).then(template => {
 
@@ -129,7 +131,10 @@ exports.find = (req, res) => {
     {
         query.balconySize = {"$in":req.body.balconySize}
     }
-    
+    if(req.body.hasOwnProperty('isEmpty'))
+    {
+        query.isEmpty = {"$in":req.body.isEmpty}
+    }
     Template.find(query).populate().then(templates => {
         res.send(templates);
 
