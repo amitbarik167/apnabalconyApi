@@ -9,6 +9,7 @@ const TemplateSchema = new mongoose.Schema(
         templatePrice:Number,
         templateImg: { data: Buffer, contentType: String },
         balconySize:String,
+        isEmpty:Boolean,
         isActive:Boolean,
         createdBy:String,
         modifiedBy:String,
