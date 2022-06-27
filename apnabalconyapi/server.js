@@ -76,7 +76,7 @@ app.listen(port, () => {
 });
 
 // Configuring the database
-const dbConfig = require('./config/database.config.js');
+const dbConfig = process.env.NODE_ENV==="production"? require('./config/database.config.js'):require('./config/database.dev.config.js');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
